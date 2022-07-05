@@ -27,8 +27,9 @@ export class ChickensService {
     return chicken;
   }
 
-  create(createCoffeeDto: any) {
-    this.chickens.push(createCoffeeDto);
+  create(createChickenDto: any) {
+    this.chickens.push(createChickenDto);
+    return createChickenDto;
   }
 
   update(id: string, updateChickenDto: any) {
@@ -38,7 +39,7 @@ export class ChickensService {
     }
   }
 
-  updateAll(id: string, updateChickenDto: any) {
+  updateAll(id: string, createChickenDto: any) {
     const existingChicken = this.findOne(id);
     if (existingChicken) {
       // update the existing entity

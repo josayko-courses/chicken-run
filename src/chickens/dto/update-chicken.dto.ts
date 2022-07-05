@@ -1,8 +1,5 @@
-export class UpdateChickenDto {
-  readonly name?: string;
-  readonly birthday?: Date;
-  readonly weight?: number;
-  readonly steps?: number;
-  readonly isRunning?: boolean;
-  readonly farmyard?: number;
-}
+import { PartialType } from '@nestjs/mapped-types';
+import { CreateChickenDto } from './create-chicken.dto';
+
+// PartialType returns the type passed into it and mark all the fields as optional
+export class UpdateChickenDto extends PartialType(CreateChickenDto) {}
