@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { createQueryBuilder, Repository } from 'typeorm';
 import { CreateChickenDto } from './dto/create-chicken.dto';
 import { UpdateChickenDto } from './dto/update-chicken.dto';
 import { Chicken } from './entities/chicken.entity';
@@ -47,5 +47,12 @@ export class ChickensService {
   async remove(id: string) {
     const chicken = await this.findOne(id);
     return this.chickenRepository.remove(chicken);
+  }
+
+  // Procedural loop
+  // https://www.darraghoriordan.com/2022/06/13/persistence-7-typeorm-postgres-9-tips-tricks-issues
+  async run() {
+    await this.chickenRepository.increment({ isRunning: true }, 'steps', 1);
+    return this.findAll();
   }
 }

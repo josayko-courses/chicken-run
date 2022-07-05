@@ -53,6 +53,6 @@ export class ChickensController {
 
   @Post('run')
   run() {
-    return `chicken run`;
+    return this.chickensService.run();
   }
 }
