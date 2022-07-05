@@ -5,4 +5,5 @@ export class Chicken {
   weight: number;
   steps: number;
   isRunning: boolean;
+  farmyard: number;
 }

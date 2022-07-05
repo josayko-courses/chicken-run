@@ -12,6 +12,8 @@ import {
   Query,
 } from '@nestjs/common';
 import { ChickensService } from './chickens.service';
+import { CreateChickenDto } from './dto/create-chicken.dto';
+import { UpdateChickenDto } from './dto/update-chicken.dto';
 
 @Controller('chickens')
 export class ChickensController {
@@ -30,17 +32,20 @@ export class ChickensController {
 
   @Post()
   @HttpCode(HttpStatus.GONE)
-  create(@Body() body) {
-    return this.chickensService.create(body);
+  create(@Body() createChickenDto: CreateChickenDto) {
+    return this.chickensService.create(createChickenDto);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() body) {
-    return this.chickensService.update(id, body);
+  update(@Param('id') id: string, @Body() updateChickenDto: UpdateChickenDto) {
+    return this.chickensService.update(id, updateChickenDto);
   }
   @Put(':id')
-  updateAll(@Param('id') id: string, @Body() body) {
-    return this.chickensService.updateAll(id, body);
+  updateAll(
+    @Param('id') id: string,
+    @Body() createChickenDto: CreateChickenDto,
+  ) {
+    return this.chickensService.updateAll(id, createChickenDto);
   }
 
   @Delete(':id')

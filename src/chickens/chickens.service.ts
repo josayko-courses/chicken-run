@@ -11,6 +11,7 @@ export class ChickensService {
       weight: 2,
       steps: 0,
       isRunning: false,
+      farmyard: 1,
     },
   ];
 
