@@ -23,4 +23,4 @@ $ docker exec -it chicken-db psql -U admin
 
 1. Login to pgadmin4 dashboard at `127.0.0.1:8080`. By default, email is `admin@admin.org` and password is `S3cret`
 2. `Add new server`, enter a name in General tab
-3. In Connection tab, default hostname is `postgres`. Leave default port to `5432` and maintenance database to postgres. Username is `admin` and Password is `S3cret`
+3. In connection tab, default hostname is `postgres`. Leave default port to `5432` and maintenance database to postgres. Connection `username/password` is either `admin/S3cret` or `docker/docker`

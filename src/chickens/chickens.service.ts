@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { createQueryBuilder, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { CreateChickenDto } from './dto/create-chicken.dto';
 import { UpdateChickenDto } from './dto/update-chicken.dto';
 import { Chicken } from './entities/chicken.entity';
