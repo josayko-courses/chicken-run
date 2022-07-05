@@ -1,4 +1,12 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Farmyard } from './farmyard.entity';
 
 @Entity()
 export class Chicken {
@@ -20,6 +28,6 @@ export class Chicken {
   @Column()
   isRunning: boolean;
 
-  @Column({ nullable: true })
-  farmyard: number;
+  @ManyToOne(() => Farmyard, (farmyard) => farmyard.id)
+  farmyard: Farmyard;
 }

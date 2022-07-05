@@ -5,6 +5,7 @@ import {
   IsOptional,
   IsBoolean,
 } from 'class-validator';
+import { Farmyard } from '../entities/farmyard.entity';
 
 export class CreateChickenDto {
   @IsString()
@@ -27,5 +28,5 @@ export class CreateChickenDto {
 
   @IsNumber()
   @IsOptional()
-  readonly farmyard: number;
+  readonly farmyard: Farmyard;
 }
