@@ -8,7 +8,7 @@ export class Chicken {
   @Column()
   name: string;
 
-  @Column()
+  @Column({ type: 'timestamptz' })
   birthday: Date;
 
   @Column()

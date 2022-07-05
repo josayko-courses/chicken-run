@@ -43,7 +43,7 @@ export class ChickensController {
     @Param('id') id: string,
     @Body() createChickenDto: CreateChickenDto,
   ) {
-    return this.chickensService.updateAll(id, createChickenDto);
+    return this.chickensService.update(id, createChickenDto);
   }
 
   @Delete(':id')

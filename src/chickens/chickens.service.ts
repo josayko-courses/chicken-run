@@ -1,55 +1,51 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { CreateChickenDto } from './dto/create-chicken.dto';
+import { UpdateChickenDto } from './dto/update-chicken.dto';
 import { Chicken } from './entities/chicken.entity';
 
 @Injectable()
 export class ChickensService {
-  private chickens: Chicken[] = [
-    {
-      id: 1,
-      name: 'Chicken-01',
-      birthday: new Date('2021-12-12'),
-      weight: 2,
-      steps: 0,
-      isRunning: false,
-      farmyard: 1,
-    },
-  ];
+  constructor(
+    @InjectRepository(Chicken)
+    private readonly chickenRepository: Repository<Chicken>,
+  ) {}
 
   findAll() {
-    return this.chickens;
+    return this.chickenRepository.find();
   }
 
-  findOne(id: string) {
-    const chicken = this.chickens.find((item) => item.id === +id);
+  async findOne(id: string) {
+    const chicken = await this.chickenRepository.findOne({
+      where: { id: +id },
+    });
     if (!chicken) {
-      throw new NotFoundException(`Chicken #${id} not found`);
+      throw new NotFoundException(`Chicken with id #${id} not found`);
     }
     return chicken;
   }
 
-  create(createChickenDto: any) {
-    this.chickens.push(createChickenDto);
-    return createChickenDto;
+  create(createChickenDto: CreateChickenDto) {
+    const chicken = this.chickenRepository.create(createChickenDto);
+    return this.chickenRepository.save(chicken);
   }
 
-  update(id: string, updateChickenDto: any) {
-    const existingChicken = this.findOne(id);
-    if (existingChicken) {
-      // update the existing entity
+  // TypeOrm: preload find and update if found
+  async update(id: string, updateChickenDto: UpdateChickenDto) {
+    const chicken = await this.chickenRepository.preload({
+      id: +id,
+      ...updateChickenDto,
+    });
+    if (!chicken) {
+      throw new NotFoundException(`Chicken with id #${id} not found`);
     }
+    return this.chickenRepository.save(chicken);
   }
 
-  updateAll(id: string, createChickenDto: any) {
-    const existingChicken = this.findOne(id);
-    if (existingChicken) {
-      // update the existing entity
-    }
-  }
-
-  remove(id: string) {
-    const chickenIndex = this.chickens.findIndex((item) => item.id === +id);
-    if (chickenIndex >= 0) {
-      this.chickens.splice(chickenIndex, 1);
-    }
+  // TypeOrm: findOne throws an error when not found
+  async remove(id: string) {
+    const chicken = await this.findOne(id);
+    return this.chickenRepository.remove(chicken);
   }
 }
