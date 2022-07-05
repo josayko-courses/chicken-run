@@ -2,8 +2,6 @@ import {
   Body,
   Controller,
   Get,
-  HttpCode,
-  HttpStatus,
   Param,
   Post,
   Patch,
@@ -32,8 +30,6 @@ export class ChickensController {
 
   @Post()
   create(@Body() createChickenDto: CreateChickenDto) {
-    console.log(createChickenDto instanceof CreateChickenDto);
-
     return this.chickensService.create(createChickenDto);
   }
 

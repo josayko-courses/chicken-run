@@ -12,7 +12,7 @@ export class CreateChickenDto {
 
   @IsDateString()
   @IsOptional()
-  readonly birthday: Date;
+  readonly birthday: string = new Date().toISOString();
 
   @IsNumber()
   readonly weight: number;
