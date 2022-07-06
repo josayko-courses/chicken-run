@@ -61,7 +61,7 @@ $ npm run start:dev
 | GET    | /chicken/{id} | Get a chicken by its {id}                                                                                   |
 | PATCH  | /chicken/{id} | Update chicken with {id} (partial)                                                                          |
 | PUT    | /chicken/{id} | Update chicken with {id} (all fields required)                                                              |
-| POST   | /chicken/run  | All chicken with `isRunning` property set to `true` are running. There `steps` property is incremented by 1 |
+| POST   | /chicken/run  | All chicken with `isRunning` property set to `true` are running. Their `steps` property is incremented by 1 |
 
 ## Author
 
