@@ -52,7 +52,16 @@ $ npm run start:dev
 
 ## Documentation
 
-// TODO
+- API documentation and details can be found at http://localhost:3000/api when running the app locally
+
+| Method | Endpoint      | Description                                                                                                 |
+| ------ | ------------- | ----------------------------------------------------------------------------------------------------------- |
+| GET    | /chicken      | Get all chickens                                                                                            |
+| POST   | /chicken      | Create a chicken                                                                                            |
+| GET    | /chicken/{id} | Get a chicken by its {id}                                                                                   |
+| PATCH  | /chicken/{id} | Update chicken with {id} (partial)                                                                          |
+| PUT    | /chicken/{id} | Update chicken with {id} (all fields required)                                                              |
+| POST   | /chicken/run  | All chicken with `isRunning` property set to `true` are running. There `steps` property is incremented by 1 |
 
 ## Author
 

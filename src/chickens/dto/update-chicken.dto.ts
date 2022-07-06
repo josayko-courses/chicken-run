@@ -1,4 +1,4 @@
-import { PartialType } from '@nestjs/mapped-types';
+import { PartialType } from '@nestjs/swagger';
 import { CreateChickenDto } from './create-chicken.dto';
 
 // PartialType returns the type passed into it and mark all the fields as optional
