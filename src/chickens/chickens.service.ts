@@ -37,8 +37,7 @@ export class ChickensService {
   }
 
   async create(createChickenDto: CreateChickenDto) {
-    console.log('NAME:', createChickenDto.farmyard);
-    let chicken;
+    let chicken = null;
     if (createChickenDto.farmyard) {
       const farmyard = await this.preloadFarmyardByName(
         createChickenDto.farmyard.name,
@@ -56,10 +55,22 @@ export class ChickensService {
 
   // TypeOrm: preload find and update if found
   async update(id: string, updateChickenDto: UpdateChickenDto) {
-    const chicken = await this.chickenRepository.preload({
-      id: +id,
-      ...updateChickenDto,
-    });
+    let chicken = null;
+    if (updateChickenDto.farmyard) {
+      const farmyard = await this.preloadFarmyardByName(
+        updateChickenDto.farmyard.name,
+      );
+      chicken = await this.chickenRepository.preload({
+        id: +id,
+        ...updateChickenDto,
+        farmyard,
+      });
+    } else {
+      chicken = await this.chickenRepository.preload({
+        id: +id,
+        ...updateChickenDto,
+      });
+    }
     if (!chicken) {
       throw new NotFoundException(`Chicken with id #${id} not found`);
     }

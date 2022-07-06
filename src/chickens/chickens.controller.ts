@@ -30,7 +30,6 @@ export class ChickensController {
 
   @Post()
   create(@Body() createChickenDto: CreateChickenDto) {
-    console.log('DTO', createChickenDto);
     return this.chickensService.create(createChickenDto);
   }
 
