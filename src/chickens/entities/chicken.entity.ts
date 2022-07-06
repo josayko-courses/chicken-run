@@ -1,11 +1,4 @@
-import {
-  Column,
-  Entity,
-  JoinTable,
-  ManyToOne,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Farmyard } from './farmyard.entity';
 
 @Entity()
@@ -28,6 +21,9 @@ export class Chicken {
   @Column()
   isRunning: boolean;
 
-  @ManyToOne(() => Farmyard, (farmyard) => farmyard.id)
+  @ManyToOne(() => Farmyard, (farmyard) => farmyard.name, {
+    cascade: true,
+    nullable: true,
+  })
   farmyard: Farmyard;
 }

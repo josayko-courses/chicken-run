@@ -1,10 +1,12 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { IsString } from 'class-validator';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Farmyard {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @IsString()
+  @Column({ nullable: true })
   name: string;
 }
