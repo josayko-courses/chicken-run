@@ -7,6 +7,6 @@ export class Farmyard {
   id: number;
 
   @IsString()
-  @Column({ nullable: true })
+  @Column()
   name: string;
 }
