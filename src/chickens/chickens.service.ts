@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 import { Repository } from 'typeorm';
 import { CreateChickenDto } from './dto/create-chicken.dto';
 import { UpdateChickenDto } from './dto/update-chicken.dto';
@@ -15,7 +16,17 @@ export class ChickensService {
     private readonly farmyardRepository: Repository<Farmyard>,
   ) {}
 
-  findAll() {
+  findAll(paginationQuery?: PaginationQueryDto) {
+    if (paginationQuery) {
+      const { limit, offset } = paginationQuery;
+      return this.chickenRepository.find({
+        relations: {
+          farmyard: true,
+        },
+        skip: offset,
+        take: limit,
+      });
+    }
     return this.chickenRepository.find({
       relations: {
         farmyard: true,
@@ -96,7 +107,10 @@ export class ChickensService {
   // Procedural loop
   // https://www.darraghoriordan.com/2022/06/13/persistence-7-typeorm-postgres-9-tips-tricks-issues
   async run() {
-    await this.chickenRepository.increment({ isRunning: true }, 'steps', 1);
-    return this.findAll();
+    return await this.chickenRepository.increment(
+      { isRunning: true },
+      'steps',
+      1,
+    );
   }
 }

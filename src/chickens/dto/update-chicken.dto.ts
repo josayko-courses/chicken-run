@@ -1,5 +1,3 @@
-import { PartialType } from '@nestjs/swagger';
-import { Type } from 'class-transformer';
 import {
   IsString,
   IsDateString,
@@ -10,7 +8,6 @@ import {
 } from 'class-validator';
 import { Farmyard } from '../entities/farmyard.entity';
 
-// PartialType returns the type passed into it and mark all the fields as optional
 export class UpdateChickenDto {
   @IsString()
   @IsOptional()
@@ -18,7 +15,7 @@ export class UpdateChickenDto {
 
   @IsDateString()
   @IsOptional()
-  readonly birthday;
+  readonly birthday: string;
 
   @IsNumber()
   @IsOptional()
@@ -30,10 +27,9 @@ export class UpdateChickenDto {
 
   @IsBoolean()
   @IsOptional()
-  readonly isRunning;
+  readonly isRunning: boolean;
 
   @IsOptional()
-  @Type(() => Farmyard)
   @ValidateNested({ each: true })
   readonly farmyard: Farmyard;
 }

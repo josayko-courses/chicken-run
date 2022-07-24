@@ -6,7 +6,6 @@ import {
   IsBoolean,
   ValidateNested,
 } from 'class-validator';
-import { Type } from 'class-transformer';
 import { Farmyard } from '../entities/farmyard.entity';
 
 export class CreateChickenDto {
@@ -29,7 +28,6 @@ export class CreateChickenDto {
   readonly isRunning: boolean = false;
 
   @IsOptional()
-  @Type(() => Farmyard)
   @ValidateNested({ each: true })
   readonly farmyard: Farmyard;
 }

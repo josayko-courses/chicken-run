@@ -9,18 +9,20 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
+import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 import { ChickensService } from './chickens.service';
 import { CreateChickenDto } from './dto/create-chicken.dto';
 import { UpdateChickenDto } from './dto/update-chicken.dto';
 
+@ApiTags('Chickens')
 @Controller('chicken')
 export class ChickensController {
   constructor(private readonly chickensService: ChickensService) {}
 
   @Get()
-  findAll(@Query() paginationQuery) {
-    // const { limit, offset } = paginationQuery;
-    return this.chickensService.findAll();
+  findAll(@Query() paginationQuery: PaginationQueryDto) {
+    return this.chickensService.findAll(paginationQuery);
   }
 
   @Get(':id')
